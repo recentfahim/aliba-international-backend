@@ -567,10 +567,10 @@
                                     <div class="widget-content-wrapper text-white">
                                         <div class="widget-content-left">
                                             <div class="widget-heading">Products Sold</div>
-                                            <div class="widget-subheading">Revenue streams</div>
+                                            <div class="widget-subheading">Revenue streams Today</div>
                                         </div>
                                         <div class="widget-content-right">
-                                            <div class="widget-numbers text-warning"><span>$14M</span></div>
+                                            <div class="widget-numbers text-warning"><span>35000</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -599,7 +599,7 @@
                                         <div class="widget-content-wrapper">
                                             <div class="widget-content-left">
                                                 <div class="widget-heading">Products Sold Value</div>
-                                                <div class="widget-subheading">Revenue streams</div>
+                                                <div class="widget-subheading">Revenue streams Today</div>
                                             </div>
                                             <div class="widget-content-right">
                                                 <div class="widget-numbers text-warning">35000</div>
