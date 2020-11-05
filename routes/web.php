@@ -22,5 +22,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/order', 'AdminOrderController@index')->name('admin.order');
     Route::get('/location', 'AdminLocationController@index')->name('admin.location');
     Route::get('/payment-history', 'AdminPaymentHistoryController@index')->name('admin.payment_history');
+    Route::get('/payment-history', 'AdminAddressController@index')->name('admin.user_address');
 
 });
