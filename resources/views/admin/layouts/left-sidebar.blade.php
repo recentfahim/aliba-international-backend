@@ -9,14 +9,14 @@
                 </a>
             </li>
             <li>
-                <a href="charts-chartjs.html">
+                <a href="{{ route('admin.location') }}">
                     <i class="metismenu-icon pe-7s-graph2">
                     </i>Location
                 </a>
             </li>
             <li class="app-sidebar__heading">Orders</li>
             <li>
-                <a href="dashboard-boxes.html">
+                <a href="{{ route('admin.order') }}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Orders
                 </a>

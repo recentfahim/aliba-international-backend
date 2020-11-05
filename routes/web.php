@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin', 'AdminController@index');
-Route::get('/admin/order', 'AdminOrderController@index');
 
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/order', 'AdminOrderController@index')->name('admin.order');
+    Route::get('/location', 'AdminLocationController@index')->name('admin.location');
+});
