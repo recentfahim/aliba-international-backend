@@ -3,7 +3,7 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading">Settings</li>
             <li>
-                <a href="charts-chartjs.html">
+                <a href="{{ route('admin.currency') }}">
                     <i class="metismenu-icon pe-7s-graph2">
                     </i>Currency Conversion
                 </a>
@@ -22,19 +22,19 @@
                 </a>
             </li>
             <li>
-                <a href="dashboard-boxes.html">
+                <a href="{{ route('admin.order_payment') }}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Order Payments
                 </a>
             </li>
             <li>
-                <a href="dashboard-boxes.html">
+                <a href="{{ route('admin.order_product') }}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Order Products
                 </a>
             </li>
             <li>
-                <a href="dashboard-boxes.html">
+                <a href="{{ route('admin.payment_history') }}">
                     <i class="metismenu-icon pe-7s-display2"></i>
                     Payment History
                 </a>
@@ -47,13 +47,13 @@
             </li>
             <li class="app-sidebar__heading">Users</li>
             <li>
-                <a href="forms-controls.html">
+                <a href="{{ route('admin.user') }}">
                     <i class="metismenu-icon pe-7s-mouse">
                     </i>Users
                 </a>
             </li>
             <li>
-                <a href="forms-layouts.html">
+                <a href="{{ route('admin.user_address') }}">
                     <i class="metismenu-icon pe-7s-eyedropper">
                     </i>Address
                 </a>
