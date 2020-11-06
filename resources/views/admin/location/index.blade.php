@@ -10,10 +10,10 @@
                 <div class="main-card mb-3 card">
                     <div class="card-header container-fluid">
                         <div class="row w-100">
-                            <div class="col-md-10">All Locations</div>
-                            <div class=" col-md-2 float-right">
+                            <div class="col-md-11">All Locations</div>
+                            <div class=" col-md-1 float-right">
                                 <a href="{{ route('admin.location_create') }}">
-                                    <button class="btn btn-primary btn-sm">Create</button>
+                                    <span><i class="fas fa-plus"></i></span>
                                 </a>
                             </div>
                         </div>
@@ -46,6 +46,14 @@
                                                 <div class="badge badge-danger">Inactive</div>
                                             </td>
                                         @endif
+                                        <td class="text-center">
+                                            <span class="mr-2 text-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </span>
+                                            <span class="text-info">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

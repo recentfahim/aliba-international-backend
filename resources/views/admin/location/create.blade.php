@@ -10,10 +10,10 @@
                 <div class="main-card mb-3 card">
                     <div class="card-header container-fluid">
                         <div class="row w-100">
-                            <div class="col-md-10">Create Location</div>
-                            <div class=" col-md-2 float-right">
+                            <div class="col-md-11">Create Location</div>
+                            <div class=" col-md-1 float-right">
                                 <a href="{{ route('admin.location') }}">
-                                    <button class="btn btn-primary btn-sm">List</button>
+                                    <span><i class="fas fa-list"></i></span>
                                 </a>
                             </div>
                         </div>
