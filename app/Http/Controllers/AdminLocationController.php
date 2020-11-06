@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class AdminLocationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function index(){
         $locations = Location::with('parent')->get();
 

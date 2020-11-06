@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AdminLoginController@showAdminLoginForm')->name('login');
+Route::post('/login', 'AdminLoginController@adminLogin')->name('admin.login');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
