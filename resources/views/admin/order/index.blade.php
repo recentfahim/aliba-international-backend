@@ -16,24 +16,24 @@
                                 <th class="text-center">ID</th>
                                 <th>Date</th>
                                 <th>Customer</th>
-                                <th>Mobile Number</th>
+                                <th>Order Status</th>
                                 <th>Location</th>
                                 <th>Total Amount</th>
-                                <th>Status</th>
+                                <th>Payment Status</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($orders as $order)
                                 <tr>
-                                    <th class="text-center">{{ $order->id }}</th>
-                                    <th>{{ $order->created_at }}</th>
-                                    <th>{{ $order->user_id }}</th>
-                                    <th>{{ $order->user_id }}</th>
-                                    <th>{{ $order->location_id }}</th>
-                                    <th>{{ $order->total_amount }}</th>
-                                    <th>{{ $order->status }}</th>
-                                    <th>Actions</th>
+                                    <td class="text-center">{{ $order->id }}</td>
+                                    <td>{{ $order->created_at }}</td>
+                                    <td>{{ $order->user->name }}</td>
+                                    <td>{{ $order->status }}</td>
+                                    <td>{{ $order->location->name }}</td>
+                                    <td>{{ $order->total_amount }}</td>
+                                    <td>{{ $order->payment_status }}</td>
+                                    <td>Actions</td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Order;
 
 class Location extends Model
 {
@@ -16,5 +17,9 @@ class Location extends Model
     public function child()
     {
         return $this->hasMany(Location::class);
+    }
+    public function order()
+    {
+        return $this->hasOne(Order::class);
     }
 }

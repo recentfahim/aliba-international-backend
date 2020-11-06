@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class AdminLocationController extends Controller
 {
     public function index(){
-        $locations = Location::all();
+        $locations = Location::with('parent')->get();
 
         return view('admin.location.index', compact('locations'));
     }

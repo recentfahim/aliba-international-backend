@@ -35,7 +35,11 @@
                                         <td class="text-center text-muted">{{ $location->id }}</td>
                                         <td class="widget-heading">{{ $location->name }}</td>
                                         <td class="text-center text-muted">
-                                            {{ \App\Location::where(['id' => $location->parent_id])->pluck('name')->first()  }}
+                                            @if($location->parent)
+                                                {{  $location->parent->name  }}
+                                            @else
+                                            -
+                                            @endif
                                         </td>
                                         @if($location->is_active)
                                             <td class="text-center">
