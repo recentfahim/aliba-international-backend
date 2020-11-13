@@ -17,4 +17,23 @@ class AdminCurrencyController extends Controller
 
         return view('admin.currency.index', compact('currency'));
     }
+
+    public function edit($id)
+    {
+        $currency = Currency::find($id);
+
+        return view('admin.currency.edit', compact('currency'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $currency = Currency::find($id);
+
+        $currency->received_currency = $request->currency_name;
+        $currency->bdt = $request->currency_bdt;
+        $currency->save();
+
+        return redirect(route('currency.index'));
+    }
+
 }

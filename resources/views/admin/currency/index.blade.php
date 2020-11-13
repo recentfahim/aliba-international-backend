@@ -23,9 +23,11 @@
                                 <td class="text-weight-bold">{{ $currency->received_currency }}</td>
                                 <td>{{ $currency->bdt }}</td>
                                 <td>
-                                    <span class="text-info">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
+                                    <a href="{{ route('currency.edit', $currency->id) }}">
+                                        <span class="text-info">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>
