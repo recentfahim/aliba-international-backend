@@ -29,11 +29,29 @@
                                     <td class="text-center">{{ $order->id }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>{{ $order->user->name }}</td>
-                                    <td>{{ $order->status }}</td>
+                                    <td>
+                                        @if($order->status == 'Pending')
+                                            <div class="mb-2 mr-2 badge badge-pill badge-secondary">{{ $order->status }}</div>
+                                        @elseif($order->status == 'Processing')
+                                            <div class="mb-2 mr-2 badge badge-pill badge-warning">{{ $order->status }}</div>
+                                        @elseif($order->status == 'Shipped')
+                                            <div class="mb-2 mr-2 badge badge-pill badge-info">{{ $order->status }}</div>
+                                        @elseif($order->status == 'Delivered')
+                                            <div class="mb-2 mr-2 badge badge-pill badge-success">{{ $order->status }}</div>
+                                        @else
+                                            <div class="mb-2 mr-2 badge badge-pill badge-alternate">{{ $order->status }}</div>
+                                        @endif
+                                    </td>
                                     <td>{{ $order->location->name }}</td>
                                     <td>{{ $order->total_amount }}</td>
                                     <td>{{ $order->payment_status }}</td>
-                                    <td>Actions</td>
+                                    <td>
+                                        <a href="#">
+                                            <button type="button" class="btn btn-info btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
