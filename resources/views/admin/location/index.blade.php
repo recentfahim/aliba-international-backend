@@ -51,13 +51,14 @@
                                             </td>
                                         @endif
                                         <td class="text-center">
-                                            <span class="mr-2 text-danger">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </span>
+                                            <button type="button" class="btn btn-danger btn-sm delete-location" location-id="{{ $location->id }}" >
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                             <a href="{{ route('location.edit', $location->id) }}">
-                                                <span class="text-info">
+                                                <button type="button" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i>
-                                                </span>
+                                                </button>
+
                                             </a>
                                         </td>
                                     </tr>
@@ -70,4 +71,44 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("body").on("click", ".delete-location", function(){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    let location_id = $(this).attr("location-id");
+                    $.ajax({
+                        url: "location/" + location_id,
+                        type: 'delete',
+                        data : {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(result) {
+                            Swal.fire(
+                                'Deleted!',
+                                result.status,
+                                'success'
+                            );
+                            setTimeout(function(){
+                                window.location = result.redirect_url;
+                            }, 1500);
+                        }
+                    });
+                }
+            })
+        });
+    });
+</script>
+
 @endsection

@@ -82,6 +82,9 @@ class AdminLocationController extends Controller
 
     public function destroy($id)
     {
-        dd($id);
+        $location = Location::find($id);
+        $location->delete();
+
+        return response()->json(['redirect_url' => route('location.index')]);
     }
 }
