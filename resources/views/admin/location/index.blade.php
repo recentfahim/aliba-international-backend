@@ -12,7 +12,7 @@
                         <div class="row w-100">
                             <div class="col-md-11">All Locations</div>
                             <div class=" col-md-1 float-right">
-                                <a href="{{ route('admin.location_create') }}">
+                                <a href="/admin/location/create">
                                     <span><i class="fas fa-plus"></i></span>
                                 </a>
                             </div>
@@ -54,9 +54,11 @@
                                             <span class="mr-2 text-danger">
                                                 <i class="fas fa-trash-alt"></i>
                                             </span>
-                                            <span class="text-info">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
+                                            <a href="{{ route('location.edit', $location->id) }}">
+                                                <span class="text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -3,13 +3,13 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading">Settings</li>
             <li>
-                <a href="{{ route('admin.currency') }}">
+                <a href="{{ route('currency.index') }}">
                     <i class="metismenu-icon pe-7s-graph2">
                     </i>Currency Conversion
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.location') }}">
+                <a href="{{ route('location.index') }}">
                     <i class="metismenu-icon pe-7s-graph2">
                     </i>Location
                 </a>

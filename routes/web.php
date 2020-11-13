@@ -19,7 +19,7 @@ Route::post('/login', 'AdminLoginController@adminLogin')->name('admin.login');
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
     Route::get('/order', 'AdminOrderController@index')->name('admin.order');
-    Route::get('/location', 'AdminLocationController@index')->name('admin.location');
+    Route::resource('location', 'AdminLocationController');
     Route::get('/location/create', 'AdminLocationController@create')->name('admin.location_create');
     Route::post('/location/store', 'AdminLocationController@store')->name('admin.location_store');
     Route::get('/payment-history', 'AdminPaymentHistoryController@index')->name('admin.payment_history');
