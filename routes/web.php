@@ -13,19 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'AdminLoginController@showAdminLoginForm')->name('login');
-Route::post('/login', 'AdminLoginController@adminLogin')->name('admin.login');
+Route::get('/', 'Admin\AdminLoginController@showAdminLoginForm')->name('login');
+Route::post('/login', 'Admin\AdminLoginController@adminLogin')->name('admin.login');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
-    Route::get('/order', 'AdminOrderController@index')->name('admin.order');
-    Route::resource('location', 'AdminLocationController');
-    Route::get('/location/create', 'AdminLocationController@create')->name('admin.location_create');
-    Route::post('/location/store', 'AdminLocationController@store')->name('admin.location_store');
-    Route::get('/payment-history', 'AdminPaymentHistoryController@index')->name('admin.payment_history');
-    Route::get('/address', 'AdminAddressController@index')->name('admin.user_address');
-    Route::get('/user', 'AdminUserController@index')->name('admin.user');
-    Route::resource('currency', 'AdminCurrencyController');
-    Route::get('/order-payment', 'AdminOrderPaymentController@index')->name('admin.order_payment');
-    Route::get('/order-product', 'AdminOrderProductController@index')->name('admin.order_product');
+    Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
+    Route::get('/order', 'Admin\AdminOrderController@index')->name('admin.order');
+    Route::resource('location', 'Admin\AdminLocationController');
+    Route::get('/location/create', 'Admin\AdminLocationController@create')->name('admin.location_create');
+    Route::post('/location/store', 'Admin\AdminLocationController@store')->name('admin.location_store');
+    Route::get('/payment-history', 'Admin\AdminPaymentHistoryController@index')->name('admin.payment_history');
+    Route::get('/address', 'Admin\AdminAddressController@index')->name('admin.user_address');
+    Route::get('/user', 'Admin\AdminUserController@index')->name('admin.user');
+    Route::resource('currency', 'Admin\AdminCurrencyController');
+    Route::get('/order-payment', 'Admin\AdminOrderPaymentController@index')->name('admin.order_payment');
+    Route::get('/order-product', 'Admin\AdminOrderProductController@index')->name('admin.order_product');
 });
