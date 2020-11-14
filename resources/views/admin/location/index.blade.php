@@ -58,7 +58,6 @@
                                                 <button type="button" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
-
                                             </a>
                                         </td>
                                     </tr>
