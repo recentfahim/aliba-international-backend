@@ -33,3 +33,7 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::get('/brand', 'Api\BrandController@rootBrand');
 });
+
+Route::prefix('v1')->group(function () {
+    Route::get('/product', 'Api\ProductController@BatchSearchItemsFrame');
+});
