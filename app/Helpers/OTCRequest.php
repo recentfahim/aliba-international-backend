@@ -1,6 +1,8 @@
 <?php
 
 function OTCRequest($method_url, $extra_param=null){
+
+
     $instanceKey = env('OTCOMMERCE_INSTANCE_KEY');
     $language = env('OTCOMMERCE_LANGUAGE');
 
@@ -15,21 +17,10 @@ function OTCRequest($method_url, $extra_param=null){
         }
     }
 
+    $client = new GuzzleHttp\Client(['base_uri' => env('OTCOMMERCE_BASE_URL')]);
+    $req = $client->request('GET', $method_url, ['query' => $params]);
 
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => env('OTCOMMERCE_BASE_URL').$method_url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => $params
-    ));
-
-    $response = curl_exec($curl);
+    $response = $req->getBody();
 
     return json_decode($response);
 }
