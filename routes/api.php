@@ -30,4 +30,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/category', 'Api\CategoryController@rootCategory');
     Route::get('/product', 'Api\ProductController@BatchSearchItemsFrame');
     Route::get('/brand', 'Api\BrandController@rootBrand');
+    Route::get('/single-product/{id}', 'Api\ProductController@BatchGetItemFullInfo');
 });

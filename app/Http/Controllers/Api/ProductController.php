@@ -17,4 +17,16 @@ class ProductController extends Controller
             return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
         }
     }
+
+    public function BatchGetItemFullInfo(Request $request, $id){
+        $params = array('itemId' => $id, 'blockList' => '', 'sessionId' => '');
+
+        $product = OTCRequest('BatchGetItemFullInfo', $params);
+
+        if($product){
+            return response()->json(['data' => $product->Result->Item, 'status' => 'Found', 'success' => true], 200);
+        } else {
+            return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
+        }
+    }
 }
