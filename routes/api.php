@@ -28,12 +28,6 @@ Route::get('/users', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::get('/category', 'Api\CategoryController@rootCategory');
-});
-
-Route::prefix('v1')->group(function () {
-    Route::get('/brand', 'Api\BrandController@rootBrand');
-});
-
-Route::prefix('v1')->group(function () {
     Route::get('/product', 'Api\ProductController@BatchSearchItemsFrame');
+    Route::get('/brand', 'Api\BrandController@rootBrand');
 });
