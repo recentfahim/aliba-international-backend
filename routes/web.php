@@ -17,7 +17,7 @@ Route::get('/', 'Admin\AdminLoginController@showAdminLoginForm')->name('login');
 Route::post('/login', 'Admin\AdminLoginController@adminLogin')->name('admin.login');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
+    Route::get('/dashboard', 'Admin\AdminDashboardController@index')->name('admin.dashboard');
     Route::get('/order', 'Admin\AdminOrderController@index')->name('admin.order');
     Route::resource('location', 'Admin\AdminLocationController');
     Route::get('/location/create', 'Admin\AdminLocationController@create')->name('admin.location_create');
