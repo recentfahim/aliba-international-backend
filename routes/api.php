@@ -28,6 +28,7 @@ Route::get('/users', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::get('/category', 'Api\CategoryController@rootCategory');
+    Route::get('/sub-category/{category_id}', 'Api\CategoryController@SubCategory');
     Route::get('/product', 'Api\ProductController@BatchSearchItemsFrame');
     Route::get('/brand', 'Api\BrandController@rootBrand');
     Route::get('/single-product/{id}', 'Api\ProductController@BatchGetItemFullInfo');
