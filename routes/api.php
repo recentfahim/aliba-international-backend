@@ -33,4 +33,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/brand', 'Api\BrandController@rootBrand');
     Route::get('/single-product/{id}', 'Api\ProductController@BatchGetItemFullInfo');
     Route::get('/banners', 'Api\BannerController@GetBanners');
+    Route::get('/home-product', 'Api\HomeProductController@GetFeatureProduct');
 });
