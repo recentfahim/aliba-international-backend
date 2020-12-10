@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     public function BatchSearchItemsFrame(Request $request){
-        $params = array('framePosition' => 5, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '', 'sessionId' => '');
+        $params = array('framePosition' => 5, 'frameSize' => 100, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><CategoryId>otc-339</CategoryId></SearchItemsParameters>', 'sessionId' => '');
         $products = OTCRequest('BatchSearchItemsFrame', $params);
 
         $product_collection = collect(new ProductCollection($products->Result->Items->Items->Content));
