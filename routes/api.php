@@ -19,14 +19,14 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/login', 'Api\AuthController@login');
-Route::post('/register', 'Api\AuthController@register');
-
-Route::get('/users', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
-
 Route::prefix('v1')->group(function () {
+    Route::post('/login', 'Api\AuthController@login');
+    Route::post('/register', 'Api\AuthController@register');
+
+    Route::get('/users', function (Request $request) {
+        return $request->user();
+    })->middleware('auth:api');
+
     Route::get('/category', 'Api\CategoryController@rootCategory');
     Route::get('/sub-category/{category_id}', 'Api\CategoryController@SubCategory');
     Route::get('/product', 'Api\ProductController@BatchSearchItemsFrame');
