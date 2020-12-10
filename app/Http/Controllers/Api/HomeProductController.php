@@ -9,14 +9,13 @@ use App\Http\Resources\ProductCollection;
 class HomeProductController extends Controller
 {
     public function GetFeatureProduct(Request $request){
-        $xmlParams = $this->GetProduct('Best', '4', 'Item');
+        $xmlParams = $this->GetProduct('Popular', '4', 'Item');
         $params = array('applicationType' => 'Website', 'xmlSearchParameters' => $xmlParams);
         $products = OTCRequest('BatchSearchRatingLists', $params);
-        return response()->json($products->Result->Items);
-        // $product_collection = collect(new ProductCollection($products->Result->Items->Result->Content));
+        $product_collection = collect(new ProductCollection($products->Result->Items[0]->Result->Content));
 
         if($products){
-            return response()->json(['data' => $products->Result->Items, 'status' => 'Found', 'success' => true], 200);
+            return response()->json(['data' => $product_collection, 'status' => 'Found', 'success' => true], 200);
         } else {
             return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
         }
