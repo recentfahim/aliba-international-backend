@@ -34,4 +34,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/single-product/{id}', 'Api\ProductController@BatchGetItemFullInfo');
     Route::get('/banners', 'Api\BannerController@GetBanners');
     Route::get('/home-product', 'Api\HomeProductController@GetFeatureProduct');
+    Route::get('/top-product', 'Api\ProductController@TopProduct');
+    Route::get('/top-selection-new-arrival', 'Api\ProductController@TopSelection');
+
 });
