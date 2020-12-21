@@ -36,5 +36,6 @@ Route::prefix('v1')->group(function () {
     Route::get('/home-product', 'Api\HomeProductController@GetFeatureProduct');
     Route::get('/top-product', 'Api\ProductController@TopProduct');
     Route::get('/top-selection-new-arrival', 'Api\ProductController@TopSelection');
-
+    Route::get('/cities', 'Api\LocationController@GetCity');
+    Route::get('/areas/{city_id}', 'Api\LocationController@GetArea');
 });
