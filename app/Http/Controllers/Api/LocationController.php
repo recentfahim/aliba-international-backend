@@ -14,7 +14,7 @@ class LocationController extends Controller
         if($cities){
             return response()->json(['data' => $cities, 'status' => 'Found', 'success' => true], 200);
         } else {
-            return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
+            return response()->json(['data' => array(), 'status' => 'No Cities Found', 'success' => false], 200);
         }
     }
 
@@ -24,7 +24,7 @@ class LocationController extends Controller
         if($areas){
             return response()->json(['data' => $areas, 'status' => 'Found', 'success' => true], 200);
         } else {
-            return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
+            return response()->json(['data' => array(), 'status' => 'No Areas Found', 'success' => false], 200);
         }
     }
 }

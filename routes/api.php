@@ -38,4 +38,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/top-selection-new-arrival', 'Api\ProductController@TopSelection');
     Route::get('/cities', 'Api\LocationController@GetCity');
     Route::get('/areas/{city_id}', 'Api\LocationController@GetArea');
+    Route::post('/user-address', 'Api\AddressController@getUser')->middleware('auth:api');
 });
