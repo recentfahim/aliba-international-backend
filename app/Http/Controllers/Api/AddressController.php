@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class AddressController extends Controller
 {
-    public function getUser(Request $request){
+    public function saveAddress(Request $request){
         $user = $request->user();
         $address = new Address();
 
@@ -24,5 +24,17 @@ class AddressController extends Controller
         $address->save();
 
         return response()->json(['message' => 'Address Saved Successfully!!', 'success' => true], 200);
+    }
+
+    public function userAddress(Request $request){
+        $user = $request->user();
+
+        $saved_address = Address::where('user_id', $user->id)->get();
+
+        if($saved_address){
+            return response()->json(['data' => $saved_address, 'status' => 'Found', 'success' => true], 200);
+        } else {
+            return response()->json(['data' => array(), 'status' => 'No Areas Found', 'success' => false], 200);
+        }
     }
 }
