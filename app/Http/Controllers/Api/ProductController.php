@@ -69,8 +69,20 @@ class ProductController extends Controller
 
         $product = OTCRequest('BatchGetItemFullInfo', $params);
 
-        if($product){
-            return response()->json(['data' => $product->Result->Item, 'status' => 'Found', 'success' => true], 200);
+        $params = array('itemId' => $id);
+
+        $product_description = OTCRequest('GetItemDescription', $params);
+
+        $related_product_params = array('framePosition' => 1, 'frameSize' => 10, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><CategoryId>'.$product->Result->Item->CategoryId.'</CategoryId></SearchItemsParameters>', 'sessionId' => '');
+        $related_products = OTCRequest('BatchSearchItemsFrame', $related_product_params);
+
+        $related_product_collection = collect(new ProductCollection($related_products->Result->Items->Items->Content));
+
+        if($product && property_exists($product_description->OtapiItemDescription, 'ItemDescription')){
+            return response()->json(['data' => $product->Result->Item, 'description' => $product_description->OtapiItemDescription->ItemDescription, 'related_product' => $related_product_collection, 'status' => 'Found', 'success' => true], 200);
+        }
+        elseif($product && !property_exists($product_description->OtapiItemDescription, 'ItemDescription')){
+            return response()->json(['data' => $product->Result->Item, 'description' => null, 'status' => 'Found', 'success' => true], 200);
         } else {
             return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
         }
