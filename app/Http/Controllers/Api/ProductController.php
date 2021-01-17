@@ -87,4 +87,12 @@ class ProductController extends Controller
             return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
         }
     }
+
+    public function SearchByText(Request $request){
+        Log::channel('stderr')->error($request->all());
+    }
+
+    public function SearchByImage(Request $request){
+        Log::channel('stderr')->error($request->all());
+    }
 }
