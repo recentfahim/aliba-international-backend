@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -89,10 +90,40 @@ class ProductController extends Controller
     }
 
     public function SearchByText(Request $request){
-        Log::channel('stderr')->error($request->all());
+        // Log::channel('stderr')->error($request->all());
+    }
+
+    public function GetSearchImageURL(Request $request){
+        if($request->hasFile('search_image')){
+            $path = Storage::putFile('public/images', $request->file('search_image'));
+            $url = Storage::url($path);
+
+            if($url){
+                return response()->json(['image_url' => $url, 'success' => true], 200);
+            } else {
+                return response()->json(['image_url' => null, 'success' => false], 200);
+            }
+        }
     }
 
     public function SearchByImage(Request $request){
-        Log::channel('stderr')->error($request->all());
+
+        $search_image_path = $request->search_key;
+        Log::channel('stderr')->error($search_image_path);
+
+        $static_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
+        // $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.config('services.images.image_url').$url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
+        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$static_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
+
+        $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
+
+        $products = collect(new ProductCollection($search_products->Result->Items->Items->Content));
+
+
+        if($products){
+            return response()->json(['search_products' => $products, 'status' => 'Found', 'success' => true], 200);
+        } else {
+            return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
+        }
     }
 }

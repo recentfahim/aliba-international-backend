@@ -40,6 +40,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/areas/{city_id}', 'Api\LocationController@GetArea');
     Route::post('/save-address', 'Api\AddressController@saveAddress')->middleware('auth:api');
     Route::get('/user-address', 'Api\AddressController@userAddress')->middleware('auth:api');
-    Route::post('/search-by-text', 'Api\ProductController@SearchByText');
-    Route::post('/search-by-image', 'Api\ProductController@SearchByImage');
+    Route::get('/search-by-text', 'Api\ProductController@SearchByText');
+    Route::get('/search-by-image', 'Api\ProductController@SearchByImage');
+    Route::post('/get-search-image-url', 'Api\ProductController@GetSearchImageURL');
 });
