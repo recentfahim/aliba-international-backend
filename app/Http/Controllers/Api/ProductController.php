@@ -93,7 +93,7 @@ class ProductController extends Controller
         // Log::channel('stderr')->error($request->all());
         $search_text = $request->search_key;
         Log::channel('stderr')->error($search_text);
-        $xml_params = '<SearchItemsParameters><ItemTitle>bowl</ItemTitle></SearchItemsParameters>';
+        $xml_params = '<SearchItemsParameters><ItemTitle>'.$search_text.'</ItemTitle></SearchItemsParameters>';
         $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => $xml_params, 'sessionId' => '');
 
         $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
@@ -127,7 +127,7 @@ class ProductController extends Controller
         Log::channel('stderr')->error($search_image_path);
 
         //$static_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
-        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.config('services.images.image_url').$search_image_path.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
+        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.env('APP_URL').$search_image_path.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
         //$search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$static_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
 
         $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
