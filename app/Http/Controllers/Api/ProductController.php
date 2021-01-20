@@ -91,6 +91,21 @@ class ProductController extends Controller
 
     public function SearchByText(Request $request){
         // Log::channel('stderr')->error($request->all());
+        $search_text = $request->search_key;
+        Log::channel('stderr')->error($search_text);
+        $xml_params = '<SearchItemsParameters><ItemTitle>bowl</ItemTitle></SearchItemsParameters>';
+        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => $xml_params, 'sessionId' => '');
+
+        $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
+        Log::channel('stderr')->error($search_products);
+        $products = collect(new ProductCollection($search_products->Result->Items->Items->Content));
+
+
+        if($products){
+            return response()->json(['search_products' => $products, 'status' => 'Found', 'success' => true], 200);
+        } else {
+            return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
+        }
     }
 
     public function GetSearchImageURL(Request $request){
@@ -111,9 +126,9 @@ class ProductController extends Controller
         $search_image_path = $request->search_key;
         Log::channel('stderr')->error($search_image_path);
 
-        $static_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
-        // $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.config('services.images.image_url').$url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
-        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$static_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
+        //$static_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
+        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.config('services.images.image_url').$url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
+        //$search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$static_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
 
         $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
 

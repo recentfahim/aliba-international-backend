@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'image' => $this->MainPictureUrl,
             'price' => $this->Price->ConvertedPriceList->DisplayedMoneys[0]->Price,
             'category_id' => $this->CategoryId,
+            // 'total_sold' => $this->FeaturedValues[0]->Value,
         ];
 
         return $product;
