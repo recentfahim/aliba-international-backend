@@ -97,7 +97,6 @@ class ProductController extends Controller
         $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => $xml_params, 'sessionId' => '');
 
         $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
-        Log::channel('stderr')->error($search_products);
         $products = collect(new ProductCollection($search_products->Result->Items->Items->Content));
 
 
