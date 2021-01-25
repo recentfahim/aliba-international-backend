@@ -123,10 +123,10 @@ class ProductController extends Controller
     public function SearchByImage(Request $request){
 
         $search_image_path = $request->search_key;
-        Log::channel('stderr')->error($search_image_path);
+        $image_url = env('APP_URL').$search_image_path;
 
-        //$static_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
-        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.env('APP_URL').$search_image_path.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
+        $image_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
+        $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$image_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
         //$search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$static_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
 
         $search_products = OTCRequest('BatchSearchItemsFrame', $search_product_params);
@@ -136,6 +136,20 @@ class ProductController extends Controller
 
         if($products){
             return response()->json(['search_products' => $products, 'status' => 'Found', 'success' => true], 200);
+        } else {
+            return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
+        }
+    }
+
+    public function CategoryProduct(Request $request, $cat_id){
+        $category_params = array('framePosition' => 1, 'frameSize' => 100, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><CategoryId>'.$cat_id.'</CategoryId></SearchItemsParameters>', 'sessionId' => '');
+        $category_products = OTCRequest('BatchSearchItemsFrame', $category_params);
+
+        $category_product_collection = collect(new ProductCollection($category_products->Result->Items->Items->Content));
+
+
+        if($category_products){
+            return response()->json(['data' => $category_product_collection, 'status' => 'Found', 'success' => true], 200);
         } else {
             return response()->json(['data' => array(), 'status' => 'No Product Found', 'success' => false], 200);
         }

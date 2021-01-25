@@ -43,4 +43,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/search-by-text', 'Api\ProductController@SearchByText');
     Route::get('/search-by-image', 'Api\ProductController@SearchByImage');
     Route::post('/get-search-image-url', 'Api\ProductController@GetSearchImageURL');
+    Route::get('/category-product/{cat_id}', 'Api\ProductController@CategoryProduct');
 });
