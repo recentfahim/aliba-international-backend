@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function buildTree($elements, $parentId = 0) {
         $branch = array();
         foreach ($elements as $element) {
-            if(array_key_exists('ParentId', $element)){
+            if(property_exists($element, 'ParentId')){
                 if ($element->ParentId == $parentId) {
                     $children = $this->buildTree($elements, $element->Id);
                     if ($children) {
@@ -31,7 +31,7 @@ class CategoryController extends Controller
         $parent_category = array();
 
         foreach($categories->CategoryInfoList->Content as $category){
-            if(!array_key_exists('ParentId', $category)){
+            if(!property_exists($category, 'ParentId')){
                 $parent_category[$category->Id] = $category;
                 $parent_category[$category->Id]->childs = $this->buildTree($categories->CategoryInfoList->Content, $category->Id);
             }
@@ -53,6 +53,5 @@ class CategoryController extends Controller
             return response()->json(['data' => array(), 'status' => 'No Category Found', 'success' => false], 200);
         }
     }
-
 
 }
