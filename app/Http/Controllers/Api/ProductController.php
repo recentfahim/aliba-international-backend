@@ -125,7 +125,7 @@ class ProductController extends Controller
         $search_image_path = $request->search_key;
         $image_url = env('APP_URL').$search_image_path;
 
-        $image_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
+        // $image_url = 'https://cbu01.alicdn.com/img/ibank/2019/628/090/11069090826.jpg';
         $search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$image_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
         //$search_product_params = array('framePosition' => 1, 'frameSize' => 50, 'blockList' => '', 'xmlParameters' => '<SearchItemsParameters><Provider>Alibaba1688</Provider><ImageUrl>'.$static_url.'</ImageUrl></SearchItemsParameters>', 'sessionId' => '');
 

@@ -8,11 +8,36 @@ use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
-    public function rootCategory(Request $request){
-        $categories = OTCRequest('GetRootCategoryInfoList');
+    public function buildTree($elements, $parentId = 0) {
+        $branch = array();
+        foreach ($elements as $element) {
+            if(array_key_exists('ParentId', $element)){
+                if ($element->ParentId == $parentId) {
+                    $children = $this->buildTree($elements, $element->Id);
+                    if ($children) {
+                        $element->children = $children;
+                    }
+                    $branch[] = $element;
+                }
+            }
+        }
 
+        return $branch;
+    }
+
+
+    public function rootCategory(Request $request){
+        $categories = OTCRequest('GetThreeLevelRootCategoryInfoList');
+        $parent_category = array();
+
+        foreach($categories->CategoryInfoList->Content as $category){
+            if(!array_key_exists('ParentId', $category)){
+                $parent_category[$category->Id] = $category;
+                $parent_category[$category->Id]->childs = $this->buildTree($categories->CategoryInfoList->Content, $category->Id);
+            }
+        }
         if($categories){
-            return response()->json(['data' => $categories->CategoryInfoList->Content, 'status' => 'Found', 'success' => true], 200);
+            return response()->json(['data' => $parent_category, 'status' => 'Found', 'success' => true], 200);
         } else {
             return response()->json(['data' => array(), 'status' => 'No Category Found', 'success' => false], 200);
         }
@@ -28,4 +53,6 @@ class CategoryController extends Controller
             return response()->json(['data' => array(), 'status' => 'No Category Found', 'success' => false], 200);
         }
     }
+
+
 }
